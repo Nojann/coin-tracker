@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useEffect, useState } from "react";
-import getCoinHistory from "./api/coinHistoryApi";
-import useApi from "./hooks/useApi";
+import getCoinHistory from "../api/coinHistoryApi";
+import useApi from "../hooks/useApi";
 
 import { Line } from "react-chartjs-2";
 import {
@@ -17,9 +17,9 @@ import {
   } from 'chart.js';
 
 
-export default function App() {
+export default function Chart() {
 
-    var getCoinHistoryApi = useApi(getCoinHistory('ethereum', 1));
+    var getCoinHistoryApi = useApi(getCoinHistory('ethereum', 180));
 
     ChartJS.register(
         CategoryScale,
@@ -44,7 +44,7 @@ export default function App() {
         },
       };
       
-      const labels = getCoinHistoryApi.data?.prices.map((item : number[]) => item[0]);
+      const labels = getCoinHistoryApi.data?.prices.map((item : number[]) => new Date(item[0]).getDate());
       
       const data = {
         labels,
@@ -61,14 +61,10 @@ export default function App() {
     useEffect(() => {
         getCoinHistoryApi.request();
 
-    }, [getCoinHistoryApi]);
-
-    console.log(getCoinHistoryApi.data);
+    }, []);
 
     return(
-        <div>
-            <Line options={options} data={data} />
-        </div>
+        <Line options={options} data={data} />
     )
 
 }

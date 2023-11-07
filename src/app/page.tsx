@@ -1,10 +1,7 @@
-import Image from 'next/image'
-import App from './App'
-
 export default function Home() {
   return (
     <main>
-      <App/>
+      <a className="btn btn-accent" href="coin">Ethereum Chart</a>
     </main>
   )
 }
