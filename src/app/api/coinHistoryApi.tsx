@@ -1,4 +1,3 @@
-import { AxiosResponse } from 'axios';
 import client from './apiClient';
 
 export default function getCoinHistory(coin : string, days : number){
